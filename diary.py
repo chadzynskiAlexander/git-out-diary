@@ -1,5 +1,6 @@
 from typing import Tuple
 from json import JSONEncoder, JSONDecoder
+import os
 
 class Diary:
     def __init__(self):
@@ -19,8 +20,8 @@ class Diary:
 
     def save(self, path) -> None:
         enc = JSONEncoder()
-        json:str = enc.encode(self)
-        fptr = open(path)
+        json:str = enc.encode(self.entries)
+        fptr = open(file=path, mode="w")
         fptr.write(json)
         fptr.close()
 
@@ -29,5 +30,5 @@ class Diary:
         json:str = fptr.read()
         fptr.close()
         dec = JSONDecoder()
-        return dec.decode(json)
+        self.entries = dec.decode(json)
 
