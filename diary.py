@@ -2,15 +2,20 @@ from typing import Tuple
 from json import JSONEncoder, JSONDecoder
 
 class Diary:
-    def __intit__(self):
-        self.entries: Tuple[str,str] = []
+    def __init__(self):
+        self._entries:list[Tuple[str,str]]|None = None
+        self.entries = []
 
     @property
-    def entries(self) -> Tuple[str,str]:
-        return self.entries
+    def entries(self) -> list[Tuple[str,str]]:
+        return self._entries
+
+    @entries.setter
+    def entries(self, val) -> None:
+        self._entries = val
 
     def add(self, date, body) -> None:
-        self.entries.append(Tuple(date,body))
+        self.entries.append((date,body))
 
     def save(self, path) -> None:
         enc = JSONEncoder()
