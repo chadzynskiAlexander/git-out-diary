@@ -18,3 +18,11 @@ class Diary:
         fptr = open(path)
         fptr.write(json)
         fptr.close()
+
+    def load(self, path):
+        fptr = open(path)
+        json:str = fptr.read()
+        fptr.close()
+        dec = JSONDecoder()
+        return dec.decode(json)
+
